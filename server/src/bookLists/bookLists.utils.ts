@@ -3,6 +3,7 @@ import { BookListDto } from './dtos/bookList.dto';
 
 export namespace BookListsUtils {
   export function convertToDto(payload: NYT.BookList): BookListDto {
+    console.log('payload', payload)
     return {
       title: payload.display_name,
       slug: payload.list_name_encoded,

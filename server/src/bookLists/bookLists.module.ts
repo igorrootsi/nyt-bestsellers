@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { NytModule } from '../nyt';
+import { NytModule } from '../nyt/nyt.module';
 import { BookListsController } from './bookLists.controller';
 import { BookListsService } from './bookLists.service';
 

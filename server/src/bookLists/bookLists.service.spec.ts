@@ -1,20 +1,38 @@
+import { QueryBus } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { BookListsService } from './bookLists.service';
 
 describe('BooksService', () => {
-  let booksService: BookListsService;
+  let bookListsService: BookListsService;
+  let queryBus: QueryBus;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [BookListsService],
-    }).compile();
+      providers: [BookListsService, QueryBus],
+    })
+      .overrideProvider(QueryBus)
+      .useValue({ execute: jest.fn() })
+      .compile();
 
-    booksService = moduleRef.get(BookListsService);
+    bookListsService = moduleRef.get(BookListsService);
+    queryBus = moduleRef.get(QueryBus);
   });
 
-  it('should return list of books', () => {
-    const booksService = new BookListsService();
+  it('should return list of books', async () => {
+    jest.mocked(queryBus.execute).mockResolvedValue({
+      results: [
+        {
+          display_name: 'Test 1',
+          list_name_encoded: 'test-1',
+          newest_published_date: 'yesterday',
+        },
+      ],
+    });
 
-    expect(booksService.getAll()).toEqual([{ id: 1, title: 'Hello' }]);
+    const actual = await bookListsService.getAll();
+
+    expect(actual).toEqual([
+      { title: 'Test 1', slug: 'test-1', newestDate: 'yesterday' },
+    ]);
   });
 });
