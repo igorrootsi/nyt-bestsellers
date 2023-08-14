@@ -1,5 +1,5 @@
+import { NYT } from '../nyt';
 import { BookListDto } from './dtos/bookList.dto';
-import { NYT } from './types';
 
 export namespace BookListsUtils {
   export function convertToDto(payload: NYT.BookList): BookListDto {
