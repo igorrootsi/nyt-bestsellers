@@ -1,19 +1,19 @@
 import { Test } from '@nestjs/testing';
-import { BooksService } from './books.service';
+import { BookListsService } from './bookLists.service';
 
 describe('BooksService', () => {
-  let booksService: BooksService;
+  let booksService: BookListsService;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [BooksService],
+      providers: [BookListsService],
     }).compile();
 
-    booksService = moduleRef.get(BooksService);
+    booksService = moduleRef.get(BookListsService);
   });
 
   it('should return list of books', () => {
-    const booksService = new BooksService();
+    const booksService = new BookListsService();
 
     expect(booksService.getAll()).toEqual([{ id: 1, title: 'Hello' }]);
   });
