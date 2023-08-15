@@ -12,11 +12,16 @@ export class BooksService {
   public async getBooks({
     date,
     listSlug,
+    limit = 10,
   }: BooksRequestDto): Promise<BookDto[]> {
-    const data = await this.queryBus.execute<FetchBooksQuery, NYT.BooksResponse>(
-      new FetchBooksQuery(listSlug, date),
-    );
+    const data = await this.queryBus.execute<
+      FetchBooksQuery,
+      NYT.BooksResponse
+    >(new FetchBooksQuery(listSlug, date));
 
-    return data.results.books.map(BookUtils.exportToDto)
+    return data.results.books
+      .map(BookUtils.exportToDto)
+      .sort((a, b) => a.rank - b.rank)
+      .slice(0, limit);
   }
 }
