@@ -10,8 +10,6 @@ export class FetchBooksHandler implements IQueryHandler<FetchBooksQuery> {
   execute({ listSlug, date }: FetchBooksQuery): Promise<any> {
     const url = `https://api.nytimes.com/svc/books/v3/lists/${date}/${listSlug}.json`;
 
-    console.log('url', url);
-
     return this.nytClientService.executeRequest<NYT.BookListsResponse>({
       method: 'GET',
       url,
