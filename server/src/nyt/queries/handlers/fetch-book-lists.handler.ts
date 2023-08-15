@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { NytClientService } from 'src/nyt/nytClient.service';
+import { NytClientService } from '../../nytClient.service';
 import { NYT } from '../../types';
 import { FetchBookListsQuery } from '../fetch-book-lists.query';
 

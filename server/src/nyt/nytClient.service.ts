@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { config } from 'src/config';
+import { config } from '../config';
 
 @Injectable()
 export class NytClientService {
