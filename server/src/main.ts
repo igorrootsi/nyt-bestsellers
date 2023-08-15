@@ -20,6 +20,7 @@ function enableSwaggerDocumentation(app: INestApplication) {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
   enableSwaggerDocumentation(app);
   await app.listen(config.getPort());
 }
